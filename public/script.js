@@ -6,6 +6,7 @@
   const scrollArea = document.getElementById('storyContent');
   const dialog = document.getElementById('chapterDialog');
   let current = slides[0];
+  let lastNoticePage;
   let selectedClass = Math.min(3, Math.max(1, Number(localStorage.getItem('jeju-demo-course') || 1) || 1));
   let map;
   let mapLayers = [];
@@ -373,7 +374,9 @@
     updateMap();
     if(current.id==='laf')window.GUIDE_NOTICES?.laf();
     if(current.id==='gimpo')window.GUIDE_NOTICES?.airport();
+    if(current.type==='rooms'&&lastNoticePage!==current.id)window.GUIDE_NOTICES?.lodging(current.id,true);
     if(['resort1','resort2'].includes(current.id))window.GUIDE_NOTICES?.lodging(current.id);
+    lastNoticePage=current.id;
     scrollArea.scrollTop = 0;
     window.scrollTo(0,0);
     syncMapGestures();
