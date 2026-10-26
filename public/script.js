@@ -62,7 +62,7 @@
   });
   function readyHtml(){const keys=['신분확인 서류는 여행 주최측 안내에 따라 준비','집결 시각과 이동편 확인','개인 약품과 비닐봉투 챙기기','배터리는 직접 가지고 탑승','숙소 비상구와 대피 방법 확인','귀가 이동편 확인'];return `<article class="slide"><p class="slide-kicker">출발 전 · 체크리스트</p><h1>출발 전에<br>챙길 것</h1><hr class="title-rule"><p class="lead">하나씩 체크하면서 준비하세요.</p><ul class="check-list preparation-list">${keys.map((item,i)=>{const key=selectedClass+':'+i;return `<li><label><input type="checkbox" data-preparation-check="${key}" ${preparationChecks[key]?'checked':''}><span>${item}</span></label></li>`;}).join('')}</ul></article>`;}
 
-  function roomsHtml(){return `<article class="slide"><p class="slide-kicker">숙소 · 안전</p><h1>숙소와<br>대피 안내</h1><hr class="title-rule"><p class="lead">실제 객실 번호·인원·성별 배정은 표시하지 않습니다.</p>${photo('resort')}<ul class="caution-list"><li>체크인 후 객실 문 안쪽의 대피 안내도를 확인하세요.</li><li>가까운 비상구와 계단 위치를 확인하세요.</li><li>비상시 엘리베이터를 이용하지 마세요.</li><li>현장 안내에 따라 질서 있게 대피하세요.</li></ul></article>`;}
+  function roomsHtml(){return `<article class="slide"><p class="slide-kicker">숙소 · 안전</p><h1>숙소와<br>대피 안내</h1><hr class="title-rule"><p class="lead">개인별 객실 배정 없이 대표 피난 대피도와 숙소 안전 수칙을 확인하세요.</p><section class="lodging-critical" aria-label="객실 생활 필수 주의사항"><h2>객실에서 반드시 지킬 것</h2><p class="lodging-ban">방 이동 금지</p><p>다른 방에 들어가지 마세요.</p><p class="lodging-ban">발코니 이동 · 무단외출 금지</p><p class="lodging-consequence">위반 시 퇴학</p><button type="button" class="reflection-button" data-show-lodging>객실 주의사항 크게 보기</button></section>${photo('resort')}<ul class="caution-list"><li>체크인 후 객실 문 안쪽의 대피 안내도를 확인하세요.</li><li>가까운 비상구와 계단 위치를 확인하세요.</li><li>비상시 엘리베이터를 이용하지 마세요.</li><li>현장 안내에 따라 질서 있게 대피하세요.</li></ul></article>`;}
 
   function cautionsHtml(slide) {
     const sections = {
@@ -121,7 +121,7 @@
       <div class="stop-body"><p>${esc(slide.subtitle)}</p>${slide.body.map(text => `<p>${esc(text)}</p>`).join('')}</div>
       ${tourismHtml(slide)}
       ${window.GUIDE_REFLECTIONS.reflectionHtml(slide)}
-      ${slide.point === 'resort' ? '<button class="next-inline" type="button" data-go="rooms"><span>객실 번호와 피난 대피도 보기</span><span aria-hidden="true">›</span></button>' : ''}
+      ${slide.point === 'resort' ? '<button class="next-inline" type="button" data-go="rooms"><span>숙소 안전 수칙과 피난 대피도 보기</span><span aria-hidden="true">›</span></button>' : ''}
       <div class="callout">${esc(day.date)} · ${esc(slide.time)}</div>
       ${nextSlide() ? `<button class="next-inline" type="button" data-go="${esc(nextSlide().id)}"><span>다음 장 · ${esc(nextSlide().title)}</span><span aria-hidden="true">›</span></button>` : ''}
     </article>`;
@@ -154,7 +154,7 @@
     gallery.hidden = !rooms;
     panel.hidden = !(detail || ready || writing);
     if (writing) panel.innerHTML = window.GUIDE_REFLECTIONS.sideHtml(current.type);
-    if(rooms)gallery.innerHTML='<div class="evac-head"><strong>숙소 안전 안내</strong></div><div class="demo-exit-plan" role="img" aria-label="비상구와 계단을 확인하고 지정된 대피로로 이동하세요"><span>객실</span><b>→ 비상구 →</b><span>계단</span></div><p>실제 숙소의 배정·도면이 아닙니다. 현장 대피 안내도를 확인하세요.</p>';
+    if(rooms)gallery.innerHTML=`<div class="evac-head"><strong>대표 피난 대피도</strong><span>A·B동 · 2~5층 공통</span></div><div class="evac-tabs"><button type="button" data-evac-expand aria-pressed="${gallery.classList.contains('evac-expanded')}">${gallery.classList.contains('evac-expanded')?'닫기':'크게 보기'}</button></div><div class="evac-large representative-evac"><img src="assets/evacuation-representative.jpg" width="1092" height="780" alt="A동과 B동의 2~5층 공통 피난 대피도. 객실 복도에서 양쪽 피난 계단으로 향하는 방향과 피난 유도등을 표시한 원본 도면."></div><p>개인별 객실 배정은 표시하지 않습니다. 실제 대피는 객실 문 안쪽의 피난안내도와 현장 지시에 따르세요.</p>`;
     if (ready) {
       const airport = data.photos.gimpo;
       panel.innerHTML = `<img class="ready-airport-photo" src="${esc(airport.src)}" alt="${esc(airport.alt)}"><div class="ready-airport-label"><span>출발 공항</span><strong>김포국제공항 국내선</strong><a href="${esc(airport.url)}" target="_blank" rel="noopener noreferrer">사진: ${esc(airport.credit)} ↗</a></div>`;

@@ -1,5 +1,5 @@
 (() => {
-  const lodgingNotice = {id:'critical-lodging',title:'반드시 지킬 숙소 규칙',body:'숙소 안전 수칙 확인\n현장 안내에 따라 안전하게 이동하세요.'};
+  const lodgingNotice = {id:'critical-lodging',title:'반드시 지킬 숙소 규칙',body:'방 이동 금지\n다른 방에 들어가지 마세요.\n\n발코니 이동 · 무단외출 금지\n위반 시 퇴학'};
   const notices = [
  {id:'demo',title:'개인정보 없는 여행 안내 체험판',body:'이름·학번 입력 없이 이용\n학교·학급·실제 객실 배정은 표시하지 않습니다.\n\n여행 코스를 고르고 장소 따라가기\n지도의 위치를 누르면 해당 일정으로 이동합니다.'},
  {id:'record',title:'소감문 기록 체험',body:'장소마다 소감문 기록\n이름·학번·연락처는 적지 마세요.\n\n제출은 이 브라우저 안에서만 체험\n기존 운영 앱이나 다른 서버로 전달되지 않습니다.'},
@@ -41,6 +41,7 @@
   function open(){active=[...notices];index=0;seen=new Set();if(!active.length)return;paint();if(!dialog.open)dialog.showModal();}
   document.addEventListener('click',e=>{
     if(e.target.closest('[data-open-notices]'))open();
+    if(e.target.closest('[data-show-lodging]'))context(lodgingNotice);
     if(e.target.closest('[data-notice-close]'))advanceOrClose();
 
   });
