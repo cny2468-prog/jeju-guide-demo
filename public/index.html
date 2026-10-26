@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f8f6f1">
+  <meta name="description" content="개인정보 없이 체험하는 제주 여행 안내 앱">
+  <meta name="robots" content="noindex, nofollow">
+  <title>제주 여행 안내 · 체험판</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231d1d1b'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='36' fill='white'%3E%EC%A0%9C%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./vendor/leaflet.css">
+  <link rel="stylesheet" href="./styles.css?v=1">
+  <link rel="stylesheet" href="./reflections.css?v=1">
+  <script src="./vendor/leaflet.js" defer></script>
+  <script src="./demo-store.js?v=1" defer></script>
+  <script src="./vendor/xlsx.full.min.js" defer></script>
+  <script src="./data.js?v=1" defer></script>
+  <script src="./schedules.js?v=1" defer></script>
+  <script src="./reflections.js?v=1" defer></script>
+  <script src="./notices.js?v=1" defer></script>
+  <script src="./script.js?v=1" defer></script>
+</head>
+<body>
+  <p class="demo-banner">여행 기록 체험판 · 개인정보 입력 없이 이용하세요 · 소감문은 이 브라우저에만 저장됩니다.</p>
+  <a class="skip-link" href="#storyContent">일정 내용으로 바로가기</a>
+  <div class="app" id="app">
+    <section class="story" aria-label="제주 여행 안내 체험판">
+      <header class="story-header">
+        <button class="chapter-button" id="chapterButton" type="button" aria-haspopup="dialog" aria-controls="chapterDialog"><span id="chapterName">출발 전</span><span class="chevron" aria-hidden="true">⌄</span></button>
+        <div class="header-actions"><span class="header-pill">여행 코스 A</span><button class="menu-button" id="menuButton" type="button" aria-label="전체 일정 열기" aria-haspopup="dialog" aria-controls="chapterDialog"><span></span><span></span><span></span></button></div>
+      </header>
+      <div class="progress" id="progress" aria-label="현재 장 진행 상태"></div>
+      <main class="story-content" id="storyContent" tabindex="-1"><div id="slideContent"></div></main>
+      <nav class="bottom-nav" aria-label="장 넘기기">
+        <button id="prevButton" class="prev-button" type="button" aria-label="이전 장">‹</button>
+        <span class="page-counter" id="pageCounter">01 / 28</span>
+        <button id="nextButton" class="next-button" type="button"><span><small>다음 장</small><strong id="nextTitle">학교에서 김포공항까지</strong></span><span aria-hidden="true">›</span></button>
+      </nav>
+    </section>
+    <aside class="map-area" aria-label="장소 따라가기 지도">
+      <div id="map" role="region" aria-label="제주 현장체험학습 장소 지도"></div>
+      <div id="roomMapGallery" class="room-map-gallery" hidden></div>
+      <div id="experiencePanel" class="experience-panel" hidden></div>
+      <div class="map-top-note" id="mapTopNote">JEJU TRIP · DEMO</div>
+      <button id="mapExpandButton" class="map-expand" type="button" aria-pressed="false">지도 크게 <span aria-hidden="true">↗</span></button>
+      <div class="map-caption" id="mapCaption">지도는 장소 순서를 보여 줍니다. 선은 실제 주행 경로가 아닙니다.</div>
+    </aside>
+  </div>
+
+  <dialog id="chapterDialog" aria-labelledby="dialogTitle">
+    <div class="dialog-head"><div><span>CONTENTS</span><h2 id="dialogTitle">전체 일정</h2></div><button type="button" id="closeDialog" aria-label="전체 일정 닫기">×</button></div>
+    <div id="chapterList" class="chapter-list"></div>
+  </dialog>
+  <dialog id="noticeDialog" class="notice-dialog" aria-labelledby="noticeTitle">
+    <div class="notice-top"><strong>공지</strong><div><span id="noticeCounter"></span></div></div>
+    <article><h2 id="noticeTitle"></h2><div id="noticeBody"></div></article>
+    <div class="notice-footer"><button class="reflection-button" type="button" data-notice-close>다음 안내 보기</button></div>
+  </dialog>
+</body>
+</html>

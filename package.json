@@ -1,0 +1,8 @@
+{
+  "name": "jeju-guide-demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-pages.mjs"
+  }
+}
